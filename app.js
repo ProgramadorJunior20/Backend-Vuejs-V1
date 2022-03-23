@@ -4,6 +4,7 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import path from 'path';
+const puerto = process.env.PORT;
 
 /* import { dbConeccion } from '../database/conectando.db.js'; */
 
@@ -15,6 +16,7 @@ const mongoose = require('mongoose');
 const uri = process.env.MONGODB_CNN;
 
 const options = {useNewUrlParser: true}
+
 
 // Or using promises
 mongoose.connect(uri, options).then(
@@ -39,7 +41,8 @@ const history = require('connect-history-api-fallback');
 app.use(history());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.set('puerto', process.env.PORT || 3000);
+app.set('puerto', puerto || 3000);
+
 app.listen(app.get('puerto'), () => {
   console.log('Example app listening on port: '+ app.get('puerto'));
 });
